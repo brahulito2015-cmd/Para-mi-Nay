@@ -150,57 +150,6 @@
       0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
       100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(45deg); }
     }
-
-    /* Escena final: Vaquera lanzando lazo y atrapando pastel */
-    #escena-final {
-      position: fixed;
-      inset: 0;
-      z-index: 60;
-      background: rgba(9, 13, 28, 0.92);
-      backdrop-filter: blur(6px);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    #escena-final.activa {
-      display: flex;
-      animation: aparecerEscena 0.8s ease;
-    }
-    @keyframes aparecerEscena {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    #canvas-vaquera {
-      width: 100%;
-      max-width: 440px;
-      height: 300px;
-      border-radius: 20px;
-      background: radial-gradient(circle at bottom, #1e1b4b 0%, #0f172a 100%);
-      border: 2px solid #fde047;
-      box-shadow: 0 0 25px rgba(250, 204, 21, 0.5);
-    }
-    #texto-final {
-      margin-top: 16px;
-      font-size: 1.35rem;
-      font-weight: bold;
-      color: #fde047;
-      text-shadow: 0 2px 10px rgba(236, 72, 153, 0.8);
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    #btn-volver {
-      margin-top: 18px;
-      padding: 10px 24px;
-      background: linear-gradient(135deg, #ec4899, #eab308);
-      border: none;
-      border-radius: 25px;
-      color: #fff;
-      font-weight: bold;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -233,13 +182,6 @@
       "Hoy es un día hermoso desde que tocaron las 12, porque es tu día. Este día es tan hermoso que veo el sol salir con tu rostro porque es y será el día más hermoso por ser tu día. Por eso te quiero desear lo mejor, mis mejores bendiciones, que Dios toque cada día en tu vida y no existirá un día en el que deje de acompañarte para lograr tocar la perilla de aquella puerta de esa iglesia a la que tanto queremos ir. Te amo y hoy te lo escribo, pero pronto te lo susurraré al oído."
     </p>
     <div class="aviso">✨ Haz tap tap mi vida ✨</div>
-  </div>
-
-  <!-- Escena final animada -->
-  <div id="escena-final">
-    <canvas id="canvas-vaquera" width="440" height="300"></canvas>
-    <div id="texto-final">🤠 ¡Me atrapaste el corazón, mi vaquera! ❤️🎂</div>
-    <button id="btn-volver" type="button">Seguir viendo tus fotos ✨</button>
   </div>
 
   <script>
@@ -291,7 +233,6 @@
       setTimeout(() => item.remove(), duracion * 1000);
     }, 700);
 
-    // Todas las frases originales + las 5 nuevas
     const frases = [
       "Te amoooo ❤️",
       "Te quierooo 💖",
@@ -306,12 +247,8 @@
     const cicloIconos = ["❤️", "⭐", "⚡", "🌸"];
     let idxFrase = 0;
     let idxIcono = 0;
-    let toquesTotales = 0;
-    let escenaMostrada = false;
 
     document.addEventListener("pointerdown", (e) => {
-      if (document.getElementById("escena-final").classList.contains("activa")) return;
-
       activarAudio();
 
       const span = document.createElement("div");
@@ -326,3 +263,22 @@
       const simbolo = cicloIconos[idxIcono];
       idxIcono = (idxIcono + 1) % cicloIconos.length;
 
+      for (let i = 0; i < 6; i++) {
+        const chispa = document.createElement("div");
+        chispa.className = "chispa";
+        chispa.textContent = simbolo;
+        chispa.style.left = e.clientX + "px";
+        chispa.style.top = e.clientY + "px";
+
+        const angulo = (Math.PI * 2 * i) / 6 + (Math.random() * 0.4);
+        const distancia = 60 + Math.random() * 50;
+        chispa.style.setProperty("--dx", Math.cos(angulo) * distancia + "px");
+        chispa.style.setProperty("--dy", Math.sin(angulo) * distancia + "px");
+
+        document.body.appendChild(chispa);
+        setTimeout(() => chispa.remove(), 1100);
+      }
+    });
+  </script>
+</body>
+</html>
