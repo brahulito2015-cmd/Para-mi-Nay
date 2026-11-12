@@ -1,1 +1,238 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Feliz Cumpleaños Nay</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: radial-gradient(circle at top, #1e1b4b 0%, #090d16 100%);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Contenedor de fotos con salto de bloqueo */
+    #galeria {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #galeria img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out, transform 6s ease-out;
+      transform: scale(1.06);
+      filter: brightness(0.52);
+    }
+    #galeria img.activa {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Opción 2: Partículas flotantes de fondo */
+    .fondo-flotante {
+      position: fixed;
+      bottom: -40px;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0.65;
+      animation: flotarFondo linear forwards;
+    }
+    @keyframes flotarFondo {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.75; }
+      85% { opacity: 0.75; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Opción 4: Tarjeta con brillo dorado y rosa */
+    .tarjeta {
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      margin: 20px;
+      padding: 24px;
+      background: rgba(12, 18, 36, 0.8);
+      border: 2px solid #facc15;
+      border-radius: 22px;
+      pointer-events: none;
+      animation: brilloBorde 3s infinite alternate;
+    }
+    @keyframes brilloBorde {
+      0% {
+        border-color: #fde047;
+        box-shadow: 0 0 18px rgba(250, 204, 21, 0.55), inset 0 0 10px rgba(250, 204, 21, 0.2);
+      }
+      100% {
+        border-color: #f472b6;
+        box-shadow: 0 0 28px rgba(236, 72, 153, 0.85), inset 0 0 14px rgba(236, 72, 153, 0.3);
+      }
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: #fde047;
+      margin-bottom: 12px;
+      text-shadow: 0 0 12px rgba(250, 204, 21, 0.7);
+    }
+    p {
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: #f8fafc;
+      margin-bottom: 16px;
+    }
+    .aviso {
+      display: inline-block;
+      padding: 9px 22px;
+      background: linear-gradient(135deg, #ec4899, #eab308);
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Textos al hacer tap tap */
+    .flotante {
+      position: fixed;
+      z-index: 25;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #fde047;
+      text-shadow: 0 2px 8px #000;
+      pointer-events: none;
+      animation: subir 1.5s ease-out forwards;
+    }
+    @keyframes subir {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+      100% { opacity: 0; transform: translate(-50%, -140px) scale(1.2); }
+    }
+
+    /* Partículas del ciclo (corazones, estrellas, rayos, flores) */
+    .chispa {
+      position: fixed;
+      z-index: 22;
+      font-size: 1.4rem;
+      pointer-events: none;
+      animation: explotarChispa 1.1s ease-out forwards;
+    }
+    @keyframes explotarChispa {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.3) rotate(45deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="galeria">
+    <img class="activa" referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img referrerpolicy="no-referrer" src="https://ibb.co">
+  </div>
+
+  <div class="tarjeta">
+    <h1>🎂 Feliz cumpleaños mi pequeña Nay 🎂</h1>
+    <p>
+      "Hoy es un día hermoso desde que tocaron las 12, porque es tu día. Este día es tan hermoso que veo el sol salir con tu rostro porque es y será el día más hermoso por ser tu día. Por eso te quiero desear lo mejor, mis mejores bendiciones, que Dios toque cada día en tu vida y no existirá un día en el que deje de acompañarte para lograr tocar la perilla de aquella puerta de esa iglesia a la que tanto queremos ir. Te amo y hoy te lo escribo, pero pronto te lo susurraré al oído."
+    </p>
+    <div class="aviso">✨ Haz tap tap mi vida ✨</div>
+  </div>
+
+  <script>
+    // 1. Transición de las 15 fotos
+    const fotos = document.querySelectorAll("#galeria img");
+    let idxFoto = 0;
+    setInterval(() => {
+      if (fotos.length > 0) {
+        fotos[idxFoto].classList.remove("activa");
+        idxFoto = (idxFoto + 1) % fotos.length;
+        fotos[idxFoto].classList.add("activa");
+      }
+    }, 3500);
+
+    // 2. Opción 2: Iconos flotando suavemente en el fondo
+    const iconosFondo = ["❤️", "✨", "🌸", "💖", "⭐"];
+    setInterval(() => {
+      const item = document.createElement("div");
+      item.className = "fondo-flotante";
+      item.textContent = iconosFondo[Math.floor(Math.random() * iconosFondo.length)];
+      item.style.left = Math.random() * 95 + "vw";
+      item.style.fontSize = (Math.random() * 14 + 14) + "px";
+      const duracion = Math.random() * 4 + 5;
+      item.style.animationDuration = duracion + "s";
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), duracion * 1000);
+    }, 700);
+
+    // 3. Tap tap con frases + ciclo de corazones, estrellas, rayos y flores
+    const frases = [
+      "Te amoooo ❤️",
+      "Te quierooo 💖",
+      "Feliz cumpleaños 🎂",
+      "Feliz y bendecido día ✨"
+    ];
+    const cicloIconos = ["❤️", "⭐", "⚡", "🌸"];
+    let idxFrase = 0;
+    let idxIcono = 0;
+
+    document.addEventListener("pointerdown", (e) => {
+      // Texto flotante
+      const span = document.createElement("div");
+      span.className = "flotante";
+      span.textContent = frases[idxFrase];
+      span.style.left = e.clientX + "px";
+      span.style.top = e.clientY + "px";
+      document.body.appendChild(span);
+      idxFrase = (idxFrase + 1) % frases.length;
+      setTimeout(() => span.remove(), 1500);
+
+      // Explosión del ciclo (corazón, estrella, rayo o flor)
+      const simbolo = cicloIconos[idxIcono];
+      idxIcono = (idxIcono + 1) % cicloIconos.length;
+
+      for (let i = 0; i < 6; i++) {
+        const chispa = document.createElement("div");
+        chispa.className = "chispa";
+        chispa.textContent = simbolo;
+        chispa.style.left = e.clientX + "px";
+        chispa.style.top = e.clientY + "px";
+
+        const angulo = (Math.PI * 2 * i) / 6 + (Math.random() * 0.4);
+        const distancia = 60 + Math.random() * 50;
+        chispa.style.setProperty("--dx", Math.cos(angulo) * distancia + "px");
+        chispa.style.setProperty("--dy", Math.sin(angulo) * distancia + "px");
+
+        document.body.appendChild(chispa);
+        setTimeout(() => chispa.remove(), 1100);
+      }
+    });
+  </script>
+</body>
+</html>
