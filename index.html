@@ -47,16 +47,15 @@
       top: 15px;
       right: 15px;
       z-index: 50;
-      padding: 8px 16px;
-      background: rgba(12, 18, 36, 0.65);
-      backdrop-filter: blur(4px);
-      border: 1.5px solid #fde047;
+      padding: 10px 18px;
+      background: rgba(236, 72, 153, 0.88);
+      border: 2px solid #fde047;
       border-radius: 25px;
-      color: #fde047;
+      color: #ffffff;
       font-weight: bold;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     }
 
     .fondo-flotante {
@@ -156,7 +155,8 @@
 
   <audio id="cancion" src="./Manuel%20Medrano%20-%20Una%20y%20Otra%20Vez%20Lyric%20Video%20%281%29.mp3" loop preload="auto"></audio>
 
-  <button id="btn-musica" type="button">🎵 Música</button>
+
+  <button id="btn-musica" type="button">🎵 Toca para música</button>
 
   <div id="galeria">
     <img class="activa" src="./IMG-20260703-WA0005.jpg">
@@ -191,12 +191,18 @@
 
     function activarAudio() {
       if (!musicaIniciada) {
+        audio.volume = 1.0;
         audio.play().then(() => {
           musicaIniciada = true;
           btnMusica.textContent = "🔊 Sonando";
+          btnMusica.style.background = "rgba(12, 18, 36, 0.7)";
         }).catch(() => {});
       }
     }
+
+    ["click", "touchstart"].forEach(evento => {
+      document.addEventListener(evento, activarAudio, { passive: true });
+    });
 
     btnMusica.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -237,20 +243,13 @@
       "Te amoooo ❤️",
       "Te quierooo 💖",
       "Feliz cumpleaños 🎂",
-      "Feliz y bendecido día ✨",
-      "Dios te bendiga 🙏",
-      "Me encantas 😍",
-      "Hermosa 🥰",
-      "Preciosa ✨",
-      "La única en mi vida 💍"
+      "Feliz y bendecido día ✨"
     ];
     const cicloIconos = ["❤️", "⭐", "⚡", "🌸"];
     let idxFrase = 0;
     let idxIcono = 0;
 
     document.addEventListener("pointerdown", (e) => {
-      activarAudio();
-
       const span = document.createElement("div");
       span.className = "flotante";
       span.textContent = frases[idxFrase];
