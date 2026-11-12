@@ -43,22 +43,6 @@
       display: block;
     }
 
-    #music-btn {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 100;
-      background: rgba(236, 72, 153, 0.85);
-      color: #ffffff;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-    }
-
     #ui-layer {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -114,9 +98,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Enlace discreto para escuchar Manuel Medrano - Bajo el agua sin bloquear la pantalla -->
-  <a id="music-btn" href="https://youtube.com" target="_blank">🎵 Bajo el agua</a>
 
   <div id="bg-container"></div>
   <canvas id="scene"></canvas>
@@ -310,3 +291,23 @@
 
       var idx = 0;
       headline.innerText = headlines[0];
+      headline.classList.add("show");
+
+      var timer = setInterval(function() {
+        idx++;
+        if (idx < headlines.length) {
+          headline.classList.remove("show");
+          setTimeout(function() {
+            headline.innerText = headlines[idx];
+            headline.classList.add("show");
+            spawnFirework(W * (0.2 + Math.random() * 0.6), H * 0.25);
+          }, 400);
+        } else {
+          clearInterval(timer);
+          setTimeout(function() {
+            letter.classList.add("show");
+            setTimeout(function() {
+              tapPrompt.classList.add("show");
+              tapMode = true;
+            }, 3500);
+          }, 1000);
