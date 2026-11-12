@@ -7,55 +7,116 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
-      width: 100%; height: 100%; overflow: hidden;
-      background: #070b19;
-      font-family: Arial, sans-serif;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1e1b4b 0%, #070b19 100%);
+      font-family: Arial, Helvetica, sans-serif;
       user-select: none;
     }
-    #bg-container { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+    #bg-container {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
     .bg-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center top;
-      opacity: 0; transition: opacity 2s ease-in-out, transform 7s ease-out;
-      transform: scale(1.08); filter: brightness(0.6);
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center top;
+      opacity: 0;
+      transition: opacity 2s ease-in-out, transform 7s ease-out;
+      transform: scale(1.08);
+      filter: brightness(0.62);
     }
-    .bg-slide.active { opacity: 1; transform: scale(1); }
-    canvas { position: fixed; inset: 0; z-index: 2; display: block; }
-    #music-box {
-      position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-      z-index: 50; border-radius: 12px; overflow: hidden; opacity: 0.9;
+    .bg-slide.active {
+      opacity: 1;
+      transform: scale(1);
     }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      display: block;
+    }
+
+    #music-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      background: rgba(236, 72, 153, 0.85);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
     #ui-layer {
-      position: fixed; inset: 0; z-index: 20; pointer-events: none;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 20px; text-align: center;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 20;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
     }
+
     #firework-headline {
-      font-size: 1.7rem; font-weight: bold; color: #fff;
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #ffffff;
       text-shadow: 0 0 15px #f472b6, 0 0 30px #3b82f6;
-      margin-bottom: 14px; opacity: 0; transition: opacity 0.8s ease;
+      margin-bottom: 14px;
+      opacity: 0;
+      transition: opacity 0.8s ease;
     }
     #firework-headline.show { opacity: 1; }
+
     #love-letter {
-      max-width: 520px; background: rgba(10, 15, 35, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 20px;
-      padding: 18px; color: #f8fafc; font-size: 0.96rem; line-height: 1.5;
-      opacity: 0; transition: opacity 1.2s ease;
+      max-width: 520px;
+      background: rgba(10, 15, 35, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 18px;
+      color: #f8fafc;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: opacity 1.2s ease;
     }
     #love-letter.show { opacity: 1; }
+
     #tap-prompt {
-      margin-top: 18px; padding: 10px 24px; background: rgba(236, 72, 153, 0.92);
-      color: #fff; font-weight: bold; font-size: 1.1rem; border-radius: 30px;
-      opacity: 0; transition: opacity 1s ease;
+      margin-top: 18px;
+      padding: 10px 24px;
+      background: rgba(236, 72, 153, 0.95);
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
+      opacity: 0;
+      transition: opacity 1s ease;
     }
     #tap-prompt.show { opacity: 1; }
   </style>
 </head>
 <body>
 
-  <div id="music-box">
-    <iframe width="280" height="60" src="https://youtube.com" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-  </div>
+  <!-- Enlace discreto para escuchar Manuel Medrano - Bajo el agua sin bloquear la pantalla -->
+  <a id="music-btn" href="https://youtube.com" target="_blank">🎵 Bajo el agua</a>
 
   <div id="bg-container"></div>
   <canvas id="scene"></canvas>
@@ -249,28 +310,3 @@
 
       var idx = 0;
       headline.innerText = headlines[0];
-      headline.classList.add("show");
-
-      var timer = setInterval(function() {
-        idx++;
-        if (idx < headlines.length) {
-          headline.classList.remove("show");
-          setTimeout(function() {
-            headline.innerText = headlines[idx];
-            headline.classList.add("show");
-            spawnFirework(W * (0.2 + Math.random() * 0.6), H * 0.25);
-          }, 400);
-        } else {
-          clearInterval(timer);
-          setTimeout(function() {
-            letter.classList.add("show");
-            setTimeout(function() {
-              tapPrompt.classList.add("show");
-              tapMode = true;
-            }, 3500);
-          }, 1000);
-        }
-      }, 2400);
-    }
-
-    window.addEventListener("pointerdown", function(e) {
