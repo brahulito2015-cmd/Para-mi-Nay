@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +19,6 @@
       user-select: none;
     }
 
-    /* Contenedor de fotos con salto de bloqueo */
     #galeria {
       position: fixed;
       inset: 0;
@@ -37,37 +35,35 @@
       opacity: 0;
       transition: opacity 1.5s ease-in-out, transform 6s ease-out;
       transform: scale(1.06);
-      filter: brightness(0.52);
+      filter: brightness(0.58);
     }
     #galeria img.activa {
       opacity: 1;
       transform: scale(1);
     }
 
-    /* Opción 2: Partículas flotantes de fondo */
     .fondo-flotante {
       position: fixed;
       bottom: -40px;
       z-index: 3;
       pointer-events: none;
-      opacity: 0.65;
+      opacity: 0.7;
       animation: flotarFondo linear forwards;
     }
     @keyframes flotarFondo {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.75; }
-      85% { opacity: 0.75; }
+      15% { opacity: 0.8; }
+      85% { opacity: 0.8; }
       100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Opción 4: Tarjeta con brillo dorado y rosa */
     .tarjeta {
       position: relative;
       z-index: 10;
       max-width: 480px;
       margin: 20px;
       padding: 24px;
-      background: rgba(12, 18, 36, 0.8);
+      background: rgba(12, 18, 36, 0.76);
       border: 2px solid #facc15;
       border-radius: 22px;
       pointer-events: none;
@@ -107,7 +103,6 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
 
-    /* Textos al hacer tap tap */
     .flotante {
       position: fixed;
       z-index: 25;
@@ -123,7 +118,6 @@
       100% { opacity: 0; transform: translate(-50%, -140px) scale(1.2); }
     }
 
-    /* Partículas del ciclo (corazones, estrellas, rayos, flores) */
     .chispa {
       position: fixed;
       z-index: 22;
@@ -140,21 +134,21 @@
 <body>
 
   <div id="galeria">
-    <img class="activa" referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
-    <img referrerpolicy="no-referrer" src="https://ibb.co">
+    <img class="activa" src="./IMG-20260703-WA0005.jpg">
+    <img src="./IMG-20260719-WA0000.jpg">
+    <img src="./IMG-20260731-WA0052.jpg">
+    <img src="./IMG-20260805-WA0010.jpg">
+    <img src="./IMG-20260819-WA0016.jpg">
+    <img src="./IMG-20260822-WA0080.jpg">
+    <img src="./IMG-20260822-WA0096.jpg">
+    <img src="./IMG-20260828-WA0028.jpg">
+    <img src="./IMG-20260830-WA0062.jpg">
+    <img src="./IMG-20260908-WA0021.jpg">
+    <img src="./IMG-20260918-WA0015.jpg">
+    <img src="./IMG-20260918-WA0018.jpg">
+    <img src="./IMG-20260920-WA0027.jpg">
+    <img src="./IMG-20260923-WA0028.jpg">
+    <img src="./IMG-20261011-WA0047.jpg">
   </div>
 
   <div class="tarjeta">
@@ -166,7 +160,6 @@
   </div>
 
   <script>
-    // 1. Transición de las 15 fotos
     const fotos = document.querySelectorAll("#galeria img");
     let idxFoto = 0;
     setInterval(() => {
@@ -177,7 +170,6 @@
       }
     }, 3500);
 
-    // 2. Opción 2: Iconos flotando suavemente en el fondo
     const iconosFondo = ["❤️", "✨", "🌸", "💖", "⭐"];
     setInterval(() => {
       const item = document.createElement("div");
@@ -191,7 +183,6 @@
       setTimeout(() => item.remove(), duracion * 1000);
     }, 700);
 
-    // 3. Tap tap con frases + ciclo de corazones, estrellas, rayos y flores
     const frases = [
       "Te amoooo ❤️",
       "Te quierooo 💖",
@@ -203,7 +194,6 @@
     let idxIcono = 0;
 
     document.addEventListener("pointerdown", (e) => {
-      // Texto flotante
       const span = document.createElement("div");
       span.className = "flotante";
       span.textContent = frases[idxFrase];
@@ -213,7 +203,6 @@
       idxFrase = (idxFrase + 1) % frases.length;
       setTimeout(() => span.remove(), 1500);
 
-      // Explosión del ciclo (corazón, estrella, rayo o flor)
       const simbolo = cicloIconos[idxIcono];
       idxIcono = (idxIcono + 1) % cicloIconos.length;
 
